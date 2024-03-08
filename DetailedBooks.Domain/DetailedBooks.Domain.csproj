@@ -22,6 +22,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\BookStatuses\BookChaptersAccessibilities.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookChaptersAccessibilities.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\BookStatuses\BookChaptersCreatingStatuses.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookChaptersCreatingStatuses.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\BookStatuses\BookVisibilityStatuses.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookVisibilityStatuses.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Localization\Errors\ErrorMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -35,6 +50,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\BookStatuses\BookChaptersAccessibilities.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookChaptersAccessibilities.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\BookStatuses\BookChaptersCreatingStatuses.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookChaptersCreatingStatuses.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\BookStatuses\BookVisibilityStatuses.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookVisibilityStatuses.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Localization\Errors\ErrorMessages.en-US.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>

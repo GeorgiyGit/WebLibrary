@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace DetailedBooks.Infrastructure.Builders.Books
 {
-    internal class BookCreatingStatusConfig : IEntityTypeConfiguration<BookCreatingStatus>
+    internal class BookCreatingStatusConfig : IEntityTypeConfiguration<BookChaptersCreatingStatus>
     {
-        public void Configure(EntityTypeBuilder<BookCreatingStatus> builder)
+        public void Configure(EntityTypeBuilder<BookChaptersCreatingStatus> builder)
         {
             builder.HasMany(e => e.Books)
-                   .WithOne(e => e.CreatingStatus)
-                   .HasForeignKey(e => e.CreatingStatusId);
+                   .WithOne(e => e.ChaptersCreatingStatus)
+                   .HasForeignKey(e => e.ChaptersCreatingStatusId);
         }
     }
 }

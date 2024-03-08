@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DetailedBooks.Domain.DTOs.StatusDTOs.Responses
 {
-    public class CreationStatusDTO
+    public class ChaptersCreatingStatusDTO
     {
         public string Id { get; set; }
         public string Name { get; set; }

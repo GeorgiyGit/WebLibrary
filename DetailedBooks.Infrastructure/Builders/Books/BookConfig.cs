@@ -31,9 +31,13 @@ namespace DetailedBooks.Infrastructure.Builders.Books
                    .WithOne(e => e.Book)
                    .HasForeignKey(e => e.BookId);
 
-            builder.HasOne(e => e.CreatingStatus)
+            builder.HasOne(e => e.ChaptersCreatingStatus)
                    .WithMany(e => e.Books)
-                   .HasForeignKey(e => e.CreatingStatusId);
+                   .HasForeignKey(e => e.ChaptersCreatingStatusId);
+
+            builder.HasOne(e => e.ChaptersAccessibility)
+                   .WithMany(e => e.Books)
+                   .HasForeignKey(e => e.ChaptersAccessibilityId);
 
             builder.HasOne(e => e.VisibilityStatus)
                    .WithMany(e => e.Books)

@@ -12,7 +12,7 @@ namespace DetailedBooks.Domain.MappingProfiles.Books
     {
         public StatusesProfile()
         {
-            CreateMap<BookCreatingStatus, CreationStatusDTO>();
+            CreateMap<BookChaptersCreatingStatus, ChaptersCreatingStatusDTO>();
             CreateMap<BookVisibilityStatus, VisibilityStatusDTO>();
         }
     }

@@ -30,8 +30,9 @@ namespace DetailedBooks.Application.Books.QueryHandlers
                                        .Include(e => e.Image)
                                        .Include(e => e.Owner)
                                        .Include(e => e.Author)
-                                       .Include(e => e.CreatingStatus)
+                                       .Include(e => e.ChaptersCreatingStatus)
                                        .Include(e => e.VisibilityStatus)
+                                       .Include(e => e.ChaptersAccessibility)
                                        .Include(e => e.Tags)
                                        .FirstOrDefaultAsync();
 

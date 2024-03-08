@@ -40,6 +40,7 @@ namespace DetailedBooks.Domain.DTOs.BookDTOs.Responses
 
 
         public VisibilityStatusDTO VisibilityStatus { get; set; }
-        public CreationStatusDTO CreationStatus { get; set; }
+        public ChaptersCreatingStatusDTO ChaptersCreationStatus { get; set; }
+        public ChaptersAccessibilityDTO ChaptersAccessibility { get; set; }
     }
 }

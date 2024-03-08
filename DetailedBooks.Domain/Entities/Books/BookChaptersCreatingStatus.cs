@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DetailedBooks.Domain.Entities.Books
 {
-    public class BookCreatingStatus
+    public class BookChaptersCreatingStatus
     {
         public string Id { get; set; }
         public string Name { get; set; }

@@ -15,8 +15,9 @@ namespace DetailedBooks.Infrastructure
         public DbSet<BookRating> BookRatings { get; set; }
         public DbSet<BookRatingPointStatistic> BookRatingPointStatistics { get; set; }
 
-        public DbSet<BookCreatingStatus> BookCreatingStatuses { get; set; }
+        public DbSet<BookChaptersCreatingStatus> BookChaptersCreatingStatuses { get; set; }
         public DbSet<BookVisibilityStatus> BookVisibilityStatuses { get; set; }
+        public DbSet<BookChaptersAccessibility> BookChaptersAccessibilities { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
 

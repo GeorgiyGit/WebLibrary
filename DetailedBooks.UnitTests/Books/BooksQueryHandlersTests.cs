@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DetailedBooks.Domain.MappingProfiles.Books;
 using FakeItEasy;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace DetailedBooks.UnitTests.Books
         {
             var profiles = new List<Profile>()
             {
-                new ProductProfile(),
+                new BooksProfile(),
                 new ProductStatusProfile(),
                 new ImageProfile()
             };

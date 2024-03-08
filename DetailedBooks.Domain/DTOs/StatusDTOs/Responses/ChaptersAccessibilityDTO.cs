@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DetailedBooks.Domain.Entities.Books
+namespace DetailedBooks.Domain.DTOs.StatusDTOs.Responses
 {
-    public class BookVisibilityStatus
+    public class ChaptersAccessibilityDTO
     {
         public string Id { get; set; }
         public string Name { get; set; }
-
-        public ICollection<Book> Books { get; set; } = new HashSet<Book>();
+        public string Description { get; set; }
     }
 }

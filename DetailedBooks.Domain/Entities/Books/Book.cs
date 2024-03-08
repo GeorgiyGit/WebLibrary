@@ -38,10 +38,13 @@ namespace DetailedBooks.Domain.Entities.Books
 
         public ICollection<BookRatingPointStatistic> PointsStatistic { get; set; } = new HashSet<BookRatingPointStatistic>();
     
-        public BookCreatingStatus CreatingStatus { get; set; }
-        public string CreatingStatusId { get; set; }
+        public BookChaptersCreatingStatus ChaptersCreatingStatus { get; set; }
+        public string ChaptersCreatingStatusId { get; set; }
 
         public BookVisibilityStatus VisibilityStatus { get; set; }
         public string VisibilityStatusId { get; set; }
+
+        public BookChaptersAccessibility ChaptersAccessibility { get; set; }
+        public string ChaptersAccessibilityId { get; set; }
     }
 }
