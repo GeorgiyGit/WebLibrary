@@ -8,6 +8,7 @@ using DetailedBooks.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using DetailedBooks.Domain.Exceptions;
 using DetailedBooks.Domain.Entities.Books;
+using DetailedBooks.Application.Books.Events;
 
 namespace DetailedBooks.Application.Books.CommandHandlers
 {
@@ -16,13 +17,16 @@ namespace DetailedBooks.Application.Books.CommandHandlers
         private readonly DetailedBookDbContext _dbContext;
         private readonly IStringLocalizer<ErrorMessages> _localizer;
         private readonly ICustomerService _customerService;
+        private readonly IMediator _mediator;
         public AddBookRatingHandler(DetailedBookDbContext dbContext,
             IStringLocalizer<ErrorMessages> localizer,
-            ICustomerService customerService)
+            ICustomerService customerService,
+            IMediator mediator)
         {
             _dbContext = dbContext;
             _localizer = localizer;
             _customerService = customerService;
+            _mediator = mediator;
         }
 
         public async Task Handle(AddBookRating request, CancellationToken cancellationToken)
@@ -60,6 +64,10 @@ namespace DetailedBooks.Application.Books.CommandHandlers
 
             await _dbContext.SaveChangesAsync();
 
+            await _mediator.Publish(new BookRatingChangedEvent()
+            {
+                BookId = request.BookId
+            });
         }
     }
 }
