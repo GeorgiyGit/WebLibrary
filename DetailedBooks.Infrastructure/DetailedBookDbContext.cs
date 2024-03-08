@@ -1,4 +1,5 @@
-﻿using DetailedBooks.Domain.Entities.Books;
+﻿using DetailedBooks.Domain.Entities.Authors;
+using DetailedBooks.Domain.Entities.Books;
 using DetailedBooks.Domain.Entities.Categories;
 using DetailedBooks.Domain.Entities.Customers;
 using DetailedBooks.Domain.Entities.Images;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DetailedBooks.Infrastructure
 {
-    public class DetailedBookDbContext : DbContext, IDetailedBookDbContext
+    public class DetailedBookDbContext : DbContext
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<BookRating> BookRatings { get; set; }
@@ -22,6 +23,8 @@ namespace DetailedBooks.Infrastructure
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<MyImage> Images { get; set; }
+
+        public DbSet<Author> Authors { get; set; }
 
         public DetailedBookDbContext(DbContextOptions options) : base(options)
         {

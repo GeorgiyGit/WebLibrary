@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\BookDTOs\Requests\" />
+    <Compile Remove="DTOs\BookDTOs\Requests\**" />
+    <EmbeddedResource Remove="DTOs\BookDTOs\Requests\**" />
+    <None Remove="DTOs\BookDTOs\Requests\**" />
   </ItemGroup>
 
   <ItemGroup>

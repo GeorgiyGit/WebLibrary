@@ -27,20 +27,19 @@ namespace DetailedBooks.Domain.DTOs.BookDTOs.Responses
 
         public int ChapterCollectionsCount { get; set; }
 
+        public AuthorDTO Author { get; set; }
+
+        public string OwnerId { get; set; }
+        public ICollection<TagDTO> Tags { get; set; } = new List<TagDTO>();
 
         public int? ChatId { get; set; }
 
+        public int RatingsCount { get; set; }
         public double TotalRating { get; set; }
+        public bool IsRatingClosed { get; set; }
 
-        public AuthorDTO Author { get; set; } 
-
-        public string OwnerId { get; set; }
-
-        public ICollection<TagDTO> Tags { get; set; } = new List<TagDTO>();
 
         public VisibilityStatusDTO VisibilityStatus { get; set; }
         public CreationStatusDTO CreationStatus { get; set; }
-
-        public bool IsRatingClosed { get; set; }
     }
 }

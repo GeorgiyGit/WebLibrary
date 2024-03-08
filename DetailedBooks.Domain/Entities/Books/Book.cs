@@ -31,8 +31,10 @@ namespace DetailedBooks.Domain.Entities.Books
         public int? ChatId { get; set; }
 
         public ICollection<BookRating> Ratings { get; set; } = new HashSet<BookRating>();
+        
         public int RatingsCount { get; set; }
         public double TotalRating { get; set; }
+        public bool IsRatingClosed { get; set; }
 
         public ICollection<BookRatingPointStatistic> PointsStatistic { get; set; } = new HashSet<BookRatingPointStatistic>();
     
@@ -41,8 +43,5 @@ namespace DetailedBooks.Domain.Entities.Books
 
         public BookVisibilityStatus VisibilityStatus { get; set; }
         public string VisibilityStatusId { get; set; }
-
-
-        public bool IsRatingClosed { get; set; }
     }
 }
