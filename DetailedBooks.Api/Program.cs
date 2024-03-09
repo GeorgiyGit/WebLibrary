@@ -1,7 +1,4 @@
 
-using DetailedBooks.Domain.Interfaces;
-using DetailedBooks.Infrastructure;
-
 namespace DetailedBooks.Api
 {
     public class Program

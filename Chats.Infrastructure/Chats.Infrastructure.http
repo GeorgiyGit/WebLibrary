@@ -1,6 +1,0 @@
-@Chats.Infrastructure_HostAddress = http://localhost:5281
-
-GET {{Chats.Infrastructure_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
