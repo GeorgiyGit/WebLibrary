@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: detailedbooks-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: detailedbooksservice
+  template:
+    metadata:
+      labels:
+        app: detailedbooksservice
+    spec:
+      containers:
+        - name: detailedbooksservice
+          image: detailedbooksapi:dev
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+    

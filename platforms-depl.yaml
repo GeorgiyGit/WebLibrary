@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: platforms-depl
+spec:
+    replicas: 1
+    selector:
+        matchLavels:
+            app: detailedbooksservice
+    template:
+        matadata:
+            labels:
+                app: detailedbooksservice
+        spec:
+            containers:
+                - name: detailedbooksservice
+                  image: binarythisle/detailedbooksservice:latest
