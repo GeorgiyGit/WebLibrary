@@ -1,5 +1,5 @@
-﻿using Identity.Application.Customers.Queries;
-using Identity.Domain.DTOs.CustomerDTOs.Responses;
+﻿using Identity.Application.Account.Queries;
+using Identity.Domain.DTOs.AccountDTOs.Responses;
 using Identity.Domain.Entities.Customers;
 using Identity.Domain.Exceptions;
 using Identity.Domain.Resources.Localization.Errors;
@@ -8,16 +8,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Identity.Application.Customers.QueryHandlers
+namespace Identity.Application.Account.QueryHandlers
 {
     public class LogInHandler : IRequestHandler<LogIn, TokenDTO>
     {

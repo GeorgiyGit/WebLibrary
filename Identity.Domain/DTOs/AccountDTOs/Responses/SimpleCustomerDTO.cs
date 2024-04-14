@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Domain.DTOs.CustomerDTOs.Responses
+namespace Identity.Domain.DTOs.AccountDTOs.Responses
 {
     public class SimpleCustomerDTO
     {

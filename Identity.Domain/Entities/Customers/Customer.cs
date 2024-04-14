@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Identity.Domain.Entities.Customers
 {
-    public class Customer:IdentityUser, IMonitoring
+    public class Customer : IdentityUser, IMonitoring
     {
         public DateTime DataCreationTime { get; set; } = DateTime.UtcNow;
         public DateTime? DataLastDeleteTime { get; set; }

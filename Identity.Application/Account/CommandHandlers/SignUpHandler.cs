@@ -1,6 +1,6 @@
-﻿using Identity.Application.Customers.Commands;
-using Identity.Application.Customers.Queries;
-using Identity.Domain.DTOs.CustomerDTOs.Responses;
+﻿using Identity.Application.Account.Commands;
+using Identity.Application.Account.Queries;
+using Identity.Domain.DTOs.AccountDTOs.Responses;
 using Identity.Domain.Entities.Customers;
 using Identity.Domain.Exceptions;
 using Identity.Domain.Resources.Customers;
@@ -8,14 +8,9 @@ using Identity.Domain.Resources.Localization.Errors;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Identity.Application.Customers.CommandHandlers
+namespace Identity.Application.Account.CommandHandlers
 {
     public class SignUpHandler : IRequestHandler<SignUp, TokenDTO>
     {
