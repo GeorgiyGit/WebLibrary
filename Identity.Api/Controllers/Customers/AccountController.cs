@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using Identity.Application.Customers.Commands;
-using Identity.Application.Customers.Queries;
-using Identity.Domain.DTOs.CustomerDTOs.Requests;
-using Identity.Domain.DTOs.CustomerDTOs.Responses;
+using Identity.Application.Account.Commands;
+using Identity.Application.Account.Queries;
+using Identity.Domain.DTOs.AccountDTOs.Requests;
+using Identity.Domain.DTOs.AccountDTOs.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using System.Runtime.CompilerServices;
 
 namespace Identity.Api.Controllers.Customers
 {
@@ -18,7 +17,7 @@ namespace Identity.Api.Controllers.Customers
         [HttpPost]
         [Route("sign-up")]
         [ProducesResponseType(typeof(TokenDTO), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<TokenDTO>> SignUp([FromRoute] SignUpRequest request)
+        public async Task<ActionResult<TokenDTO>> SignUp([FromBody] SignUpRequest request)
         {
             var command = _mapper.Map<SignUp>(request);
             var result = await _mediator.Send(command);
@@ -28,7 +27,7 @@ namespace Identity.Api.Controllers.Customers
         [HttpPost]
         [Route("log-in")]
         [ProducesResponseType(typeof(TokenDTO), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<TokenDTO>> LogIn([FromRoute] LogInRequest request)
+        public async Task<ActionResult<TokenDTO>> LogIn([FromBody] LogInRequest request)
         {
             var query = _mapper.Map<LogIn>(request);
             var result = await _mediator.Send(query);

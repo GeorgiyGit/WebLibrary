@@ -1,26 +1,41 @@
 version: '3.4'
 
 services:
-  mssql:
-    container_name: sql-server
-    image: mcr.microsoft.com/mssql/server:2017-latest
-    restart: always
+  identitydb:
+    container_name: identitydb
     environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "atea"
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=Password@1
+      - POSTGRES_DB=Identitydb
+    restart: always
     ports:
-      - 1433:1433
+      - "5432:5432"
     volumes:
-      - my-volume:/var/opt/mssql
+      - postgres_data:/var/lib/postgresql/data/
+
+  apigateway:
+    container_name: apigateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development     
+    depends_on:
+      - identity.api
+    ports:
+      - "8000:8000"
 
   identity.api:
+    container_name: identity.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
+      - "ConnectionStrings__LocalDbContextConnection=Server=identitydb;Port=5432;Database=Identitydb;User Id=admin;Password=Password@1;"
+      - "JwtOptions__Issuer=WebLibrary"
+      - "JwtOptions__Lifetime=120"
+      - "JwtOptions__Audience=WebLibraryAudience"
+      - "JwtOptions__Key=yB\bHgL1415r6TH%;jHpWz(Pdrvjy2Aq9xqMeartaer$524fsr_<8awzbsS^!kq':cbF5ygZ*yEE5pys#3z?@L6,zpfuP,?d:"
+    depends_on:
+      - identitydb
     ports:
-      - "8080"
-      - "8081"
+      - "8081:8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

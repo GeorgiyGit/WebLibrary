@@ -1,8 +1,20 @@
 version: '3.4'
 
 services:
+  identitydb:
+    image: postgres
+
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+
   identity.api:
     image: ${DOCKER_REGISTRY-}identityapi
     build:
       context: .
       dockerfile: Identity.Api/Dockerfile
+
+volumes:
+  postgres_data:

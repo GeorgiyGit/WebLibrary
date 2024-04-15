@@ -10,18 +10,18 @@ using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using Identity.Domain.DTOs.AccountDTOs.Requests;
 using Asp.Versioning;
+using Identity.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var connectionString = builder.Configuration.GetConnectionString("LocalClusterizationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'HostClusterizationDbContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("LocalDbContextConnection") ?? throw new InvalidOperationException("Connection string 'LocalDbContextConnection' not found.");
 
-//var vectorConnectionString = builder.Configuration.GetConnectionString("VectorLocalClusterizationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'VectorLocalClusterizationDbContextConnection' not found.");
 
 ConfigurationManager configuration = builder.Configuration;
 
-builder.Services.AddDbContext<IdentityDbContext>(x => x.UseSqlServer(connectionString, builder =>
+builder.Services.AddDbContext<IdentityServiceDbContext>(x => x.UseNpgsql(connectionString, builder =>
 {
     builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
 }));
@@ -38,6 +38,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(SignUpRequest).Assembly);
 builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
+builder.Services.ConfigureSwagger();
 
 builder.Services.AddApiVersioning(options =>
 {

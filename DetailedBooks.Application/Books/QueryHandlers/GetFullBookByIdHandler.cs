@@ -5,8 +5,8 @@ using DetailedBooks.Domain.Exceptions;
 using DetailedBooks.Domain.Resources.Localization.Errors;
 using DetailedBooks.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using System.Data.Entity;
 using System.Net;
 
 namespace DetailedBooks.Application.Books.QueryHandlers

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Infrastructure
 {
-    public class IdentityDbContext : IdentityDbContext<Customer>
+    public class IdentityServiceDbContext : IdentityDbContext<Customer>
     {
-        public IdentityDbContext(DbContextOptions options) : base(options)
+        public IdentityServiceDbContext(DbContextOptions options) : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
