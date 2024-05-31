@@ -4,7 +4,6 @@ using Identity.Api.Extensions;
 using Identity.Api.Middlewares;
 using Identity.Application.Account.Commands;
 using Identity.Application.MappingProfiles;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -21,9 +20,9 @@ var connectionString = builder.Configuration.GetConnectionString("LocalDbContext
 
 ConfigurationManager configuration = builder.Configuration;
 
-builder.Services.AddDbContext<IdentityServiceDbContext>(x => x.UseNpgsql(connectionString, builder =>
+builder.Services.AddDbContext<IdentityServiceDbContext>(x => x.UseSqlServer(connectionString, builder =>
 {
-    builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+    builder.EnableRetryOnFailure(1, TimeSpan.FromSeconds(5), null);
 }));
 
 builder.Services.AddLocalization();
