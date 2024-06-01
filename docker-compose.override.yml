@@ -1,17 +1,16 @@
 version: '3.4'
 
 services:
-  identitydb:
-    container_name: identitydb
+  ms-sql-server:
+    container_name: sqlserverdb
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=Password@1
-      - POSTGRES_DB=Identitydb
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "41924192Ge11$"
     restart: always
     ports:
-      - "5432:5432"
+      - "1401:1433"
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - sqlsystem:/var/opt/mssql
 
   apigateway:
     container_name: apigateway
@@ -27,13 +26,13 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTPS_PORTS=8081
-      - "ConnectionStrings__LocalDbContextConnection=Server=identitydb;Port=5432;Database=Identitydb;User Id=admin;Password=Password@1;"
+      - "ConnectionStrings__LocalDbContextConnection=Server=ms-sql-server;Database=identityDb;User Id=SA;Password=41924192Ge11$;TrustServerCertificate=True"
       - "JwtOptions__Issuer=WebLibrary"
       - "JwtOptions__Lifetime=120"
       - "JwtOptions__Audience=WebLibraryAudience"
-      - "JwtOptions__Key=yB\bHgL1415r6TH%;jHpWz(Pdrvjy2Aq9xqMeartaer$524fsr_<8awzbsS^!kq':cbF5ygZ*yEE5pys#3z?@L6,zpfuP,?d:"
+      - "JwtOptions__Key=yB\bHgL1415r6TH%;jHpWz(Pdrvjy2Aq9xqMeartaer$524fsr_<8awzbsS^!kq':cbF5ygZ*yEE5pys#3z?@L6,zpfuP,?d"
     depends_on:
-      - identitydb
+      - ms-sql-server
     ports:
       - "8081:8081"
     volumes:
