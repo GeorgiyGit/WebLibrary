@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  identitydb:
-    image: postgres
+  ms-sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
 
   apigateway:
     image: ${DOCKER_REGISTRY-}apigateway
@@ -17,4 +17,4 @@ services:
       dockerfile: Identity.Api/Dockerfile
 
 volumes:
-  postgres_data:
+  sqlsystem:
