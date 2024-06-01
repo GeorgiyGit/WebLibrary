@@ -1,6 +1,11 @@
-﻿using Identity.Infrastructure;
+﻿using Identity.Domain.Entities.Customers;
+using Identity.Domain.Resources.Customers;
+using Identity.Infrastructure;
+using Identity.IntegrationTests.Helpers;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -20,24 +25,19 @@ namespace Identity.IntegrationTests
         {
             builder.ConfigureTestServices(services =>
             {
-                // Remove the existing DbContextOptions
                 services.RemoveAll(typeof(DbContextOptions<IdentityServiceDbContext>));
 
-                // Register a new DBContext that will use our test connection string
                 services.AddDbContext<IdentityServiceDbContext>(options =>
                 {
-                    options.UseInMemoryDatabase(Guid.NewGuid().ToString());
+                    options.UseInMemoryDatabase("InMemoryDbForTesting");
                 });
 
-                // Add the authentication handler
                 services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
 
-                // Delete the database (if exists) to ensure we start clean
                 IdentityServiceDbContext dbContext = CreateDbContext(services);
                 dbContext.Database.EnsureDeleted();
             });
         }
-
         private static IdentityServiceDbContext CreateDbContext(IServiceCollection services)
         {
             var serviceProvider = services.BuildServiceProvider();
