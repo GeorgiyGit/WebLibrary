@@ -1,4 +1,6 @@
-﻿using Categories.Domain.Entities.Books;
+﻿using Categories.Domain.Entities;
+using Categories.Domain.Entities.Books;
+using Categories.Domain.Entities.Tags;
 using Categories.Domain.Resources.Tags;
 using Categories.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -22,8 +24,36 @@ namespace Categories.IntegrationTests.Helpers
 
             book.Tags.Add(tag);
             tag.Books.Add(book);
-
             await context.Books.AddAsync(book);
+
+            var deletedLanguageTag = new Tag()
+            {
+                Id = 100,
+                TypeId = TagTypes.LanguageTag,
+                IsDeleted = true,
+            };
+
+            var dlTagNameEn = new TagTranslatedText()
+            {
+                LanguageCode = Languages.EN,
+                ValueEntity = deletedLanguageTag,
+                Id = 100,
+                Value = "Deleted"
+            };
+            var dlTagNameSk = new TagTranslatedText()
+            {
+                LanguageCode = Languages.SK,
+                ValueEntity = deletedLanguageTag,
+                Id = 101,
+                Value = "Odstránené"
+            };
+            await context.Tags.AddAsync(deletedLanguageTag);
+            await context.TagTranslatedTexts.AddRangeAsync(dlTagNameEn, dlTagNameSk);
+
+            book.Tags.Add(deletedLanguageTag);
+            deletedLanguageTag.Books.Add(book);
+
+
             await context.SaveChangesAsync();
         }
     }

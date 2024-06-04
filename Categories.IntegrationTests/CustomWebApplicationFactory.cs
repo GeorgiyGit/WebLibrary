@@ -18,13 +18,14 @@ namespace Categories.IntegrationTests
     {
         override protected void ConfigureWebHost(IWebHostBuilder builder)
         {
+            var dbName = Guid.NewGuid().ToString();
             builder.ConfigureTestServices(services =>
             {
                 services.RemoveAll(typeof(DbContextOptions<CategoriesDbContext>));
 
                 services.AddDbContext<CategoriesDbContext>(options =>
                 {
-                    options.UseInMemoryDatabase("CategoriesInMemoryDbForTesting");
+                    options.UseInMemoryDatabase(dbName);
                 });
 
                 services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();

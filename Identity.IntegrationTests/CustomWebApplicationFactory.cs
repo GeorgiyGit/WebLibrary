@@ -23,13 +23,14 @@ namespace Identity.IntegrationTests
     {
         override protected void ConfigureWebHost(IWebHostBuilder builder)
         {
+            var dbName = Guid.NewGuid().ToString();
             builder.ConfigureTestServices(services =>
             {
                 services.RemoveAll(typeof(DbContextOptions<IdentityServiceDbContext>));
 
                 services.AddDbContext<IdentityServiceDbContext>(options =>
                 {
-                    options.UseInMemoryDatabase("InMemoryDbForTesting");
+                    options.UseInMemoryDatabase(dbName);
                 });
 
                 services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
