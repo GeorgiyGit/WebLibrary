@@ -12,7 +12,7 @@ namespace Categories.Api.Controllers.TagTypes
         {
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("get-all")]
         [ProducesResponseType(typeof(ICollection<TagTypeDTO>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAllTagTypes()

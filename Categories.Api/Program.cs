@@ -13,100 +13,106 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-var connectionString = builder.Configuration.GetConnectionString("LocalDbContextConnection") ?? throw new InvalidOperationException("Connection string 'LocalDbContextConnection' not found.");
-
-
-ConfigurationManager configuration = builder.Configuration;
-
-builder.Services.AddDbContext<CategoriesDbContext>(x => x.UseSqlServer(connectionString, builder =>
+public class Program
 {
-    builder.EnableRetryOnFailure(1, TimeSpan.FromSeconds(5), null);
-}));
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddLocalization();
-builder.Services.AddControllers();
+        // Add services to the container.
 
-builder.Services.AddAutoMapper(typeof(TagMappingProfile).Assembly);
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(AddTag).Assembly));
-
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssembly(typeof(AddTagValidator).Assembly);
-
-builder.Services.AddScoped<ILanguageService, LanguageService>();
-builder.Services.AddHttpContextAccessor();
-
-builder.Services.AddAuthentication();
-//builder.Services.ConfigureIdentity();
-builder.Services.ConfigureJWT(builder.Configuration);
-builder.Services.ConfigureSwagger();
+        var connectionString = builder.Configuration.GetConnectionString("LocalDbContextConnection") ?? throw new InvalidOperationException("Connection string 'LocalDbContextConnection' not found.");
 
 
+        ConfigurationManager configuration = builder.Configuration;
 
-builder.Services.AddApiVersioning(options =>
-{
-    options.DefaultApiVersion = new ApiVersion(1);
-    options.ReportApiVersions = true;
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.ApiVersionReader = ApiVersionReader.Combine(
-        new UrlSegmentApiVersionReader(),
-        new HeaderApiVersionReader("X-Api-Version"));
-}).AddApiExplorer(options =>
-{
-    options.GroupNameFormat = "'v'V";
-    options.SubstituteApiVersionInUrl = true;
-});
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigin",
-        builder =>
+        builder.Services.AddDbContext<CategoriesDbContext>(x => x.UseSqlServer(connectionString, builder =>
         {
-            builder.WithOrigins("https://localhost:44444", "http://localhost:4200")
-                .AllowCredentials()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+            builder.EnableRetryOnFailure(1, TimeSpan.FromSeconds(5), null);
+        }));
+
+        builder.Services.AddLocalization();
+        builder.Services.AddControllers();
+
+        builder.Services.AddAutoMapper(typeof(TagMappingProfile).Assembly);
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(AddTag).Assembly));
+
+        builder.Services.AddFluentValidationAutoValidation();
+        builder.Services.AddValidatorsFromAssembly(typeof(AddTagValidator).Assembly);
+
+        builder.Services.AddScoped<ILanguageService, LanguageService>();
+        builder.Services.AddHttpContextAccessor();
+
+        builder.Services.AddAuthentication();
+        //builder.Services.ConfigureIdentity();
+        builder.Services.ConfigureJWT(builder.Configuration);
+        builder.Services.ConfigureSwagger();
+
+
+
+        builder.Services.AddApiVersioning(options =>
+        {
+            options.DefaultApiVersion = new ApiVersion(1);
+            options.ReportApiVersions = true;
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.ApiVersionReader = ApiVersionReader.Combine(
+                new UrlSegmentApiVersionReader(),
+                new HeaderApiVersionReader("X-Api-Version"));
+        }).AddApiExplorer(options =>
+        {
+            options.GroupNameFormat = "'v'V";
+            options.SubstituteApiVersionInUrl = true;
         });
-});
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowSpecificOrigin",
+                builder =>
+                {
+                    builder.WithOrigins("https://localhost:44444", "http://localhost:4200")
+                        .AllowCredentials()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+        });
 
-var app = builder.Build();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
-app.UseCors("AllowSpecificOrigin");
+        var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+        app.UseCors("AllowSpecificOrigin");
 
-app.UseHttpsRedirection();
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
 
-app.UseMiddleware<ExceptionMiddleware>();
+        app.UseHttpsRedirection();
 
-var supportedCultures = new[]
-{
+        app.UseMiddleware<ExceptionMiddleware>();
+
+        var supportedCultures = new[]
+        {
     new CultureInfo("sk-SK"),
     new CultureInfo("en-US")
 };
 
-app.UseRequestLocalization(new RequestLocalizationOptions
-{
-    DefaultRequestCulture = new RequestCulture("sk-SK"),
-    SupportedCultures = supportedCultures,
-    SupportedUICultures = supportedCultures
-});
+        app.UseRequestLocalization(new RequestLocalizationOptions
+        {
+            DefaultRequestCulture = new RequestCulture("sk-SK"),
+            SupportedCultures = supportedCultures,
+            SupportedUICultures = supportedCultures
+        });
 
-app.UseAuthentication();
-app.UseAuthorization();
+        app.UseAuthentication();
+        app.UseAuthorization();
 
-app.MapControllers();
+        app.MapControllers();
 
-app.Run();
+        app.Run();
+    }
+}

@@ -49,17 +49,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{034AF388-C29F-4C15-84A8-1B70268BE6AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.IntegrationTests", "Identity.IntegrationTests\Identity.IntegrationTests.csproj", "{9ADC18A5-EBBA-44D3-95C5-5811A90F6527}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.IntegrationTests", "Identity.IntegrationTests\Identity.IntegrationTests.csproj", "{9ADC18A5-EBBA-44D3-95C5-5811A90F6527}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CategoriesService", "CategoriesService", "{9BF33EAC-9C2A-48D8-93F1-AE164B1B516A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Categories.Api", "Categories.Api\Categories.Api.csproj", "{04A46D4A-0561-4970-99FD-37A7531BA656}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Categories.Api", "Categories.Api\Categories.Api.csproj", "{04A46D4A-0561-4970-99FD-37A7531BA656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Categories.Application", "Categories.Application\Categories.Application.csproj", "{9C0E7EE3-27D8-4DF4-882A-7FE0B1DF312F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Categories.Application", "Categories.Application\Categories.Application.csproj", "{9C0E7EE3-27D8-4DF4-882A-7FE0B1DF312F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Categories.Domain", "Categories.Domain\Categories.Domain.csproj", "{6A10424E-27D3-4CA0-A8CD-8E21167F2DC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Categories.Domain", "Categories.Domain\Categories.Domain.csproj", "{6A10424E-27D3-4CA0-A8CD-8E21167F2DC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Categories.Infrastructure", "Categories.Infrastructure\Categories.Infrastructure.csproj", "{A9E5CF93-B53E-4360-9EED-87897BF1FB01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Categories.Infrastructure", "Categories.Infrastructure\Categories.Infrastructure.csproj", "{A9E5CF93-B53E-4360-9EED-87897BF1FB01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EBA0AB55-ADEA-4311-B2BA-0680E2203124}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Categories.IntegrationTests", "Categories.IntegrationTests\Categories.IntegrationTests.csproj", "{B442226B-62DA-423F-ACF3-907F71A88AD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +151,10 @@ Global
 		{A9E5CF93-B53E-4360-9EED-87897BF1FB01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9E5CF93-B53E-4360-9EED-87897BF1FB01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9E5CF93-B53E-4360-9EED-87897BF1FB01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B442226B-62DA-423F-ACF3-907F71A88AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B442226B-62DA-423F-ACF3-907F71A88AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B442226B-62DA-423F-ACF3-907F71A88AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B442226B-62DA-423F-ACF3-907F71A88AD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,6 +186,8 @@ Global
 		{9C0E7EE3-27D8-4DF4-882A-7FE0B1DF312F} = {9BF33EAC-9C2A-48D8-93F1-AE164B1B516A}
 		{6A10424E-27D3-4CA0-A8CD-8E21167F2DC5} = {9BF33EAC-9C2A-48D8-93F1-AE164B1B516A}
 		{A9E5CF93-B53E-4360-9EED-87897BF1FB01} = {9BF33EAC-9C2A-48D8-93F1-AE164B1B516A}
+		{EBA0AB55-ADEA-4311-B2BA-0680E2203124} = {9BF33EAC-9C2A-48D8-93F1-AE164B1B516A}
+		{B442226B-62DA-423F-ACF3-907F71A88AD0} = {EBA0AB55-ADEA-4311-B2BA-0680E2203124}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5E2E0E38-07BB-4A57-9794-22E49837164B}
