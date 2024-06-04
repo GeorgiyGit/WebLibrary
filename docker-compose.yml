@@ -16,5 +16,11 @@ services:
       context: .
       dockerfile: Identity.Api/Dockerfile
 
+  categories.api:
+    image: ${DOCKER_REGISTRY-}categoriesapi
+    build:
+      context: .
+      dockerfile: Categories.Api/Dockerfile
+
 volumes:
   sqlsystem:

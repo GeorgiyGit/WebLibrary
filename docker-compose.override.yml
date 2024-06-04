@@ -5,7 +5,7 @@ services:
     container_name: sqlserverdb
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "41924192Ge11$"
+      SA_PASSWORD: "12345678Ea#4"
     restart: always
     ports:
       - "1401:1433"
@@ -19,14 +19,15 @@ services:
     depends_on:
       - identity.api
     ports:
-      - "8000:8000"
+      - "7000:8000"
 
   identity.api:
     container_name: identity.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - "ConnectionStrings__LocalDbContextConnection=Server=ms-sql-server;Database=identityDb;User Id=SA;Password=41924192Ge11$;TrustServerCertificate=True"
+      - "ConnectionStrings__LocalDbContextConnection=Server=ms-sql-server;Database=identityDb;User Id=SA;Password=12345678Ea#4;TrustServerCertificate=True"
       - "JwtOptions__Issuer=WebLibrary"
       - "JwtOptions__Lifetime=120"
       - "JwtOptions__Audience=WebLibraryAudience"
@@ -34,7 +35,28 @@ services:
     depends_on:
       - ms-sql-server
     ports:
-      - "8081:8081"
+      - "7001:8080"
+      - "7071:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  categories.api:
+    container_name: categories.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - "ConnectionStrings__LocalDbContextConnection=Server=ms-sql-server;Database=CategoriesDb;User Id=SA;Password=12345678Ea#4;TrustServerCertificate=True"
+      - "JwtOptions__Issuer=WebLibrary"
+      - "JwtOptions__Lifetime=120"
+      - "JwtOptions__Audience=WebLibraryAudience"
+      - "JwtOptions__Key=yB\bHgL1415r6TH%;jHpWz(Pdrvjy2Aq9xqMeartaer$524fsr_<8awzbsS^!kq':cbF5ygZ*yEE5pys#3z?@L6,zpfuP,?d"
+    depends_on:
+      - ms-sql-server
+    ports:
+      - "7002:8080"
+      - "7072:8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
