@@ -34,7 +34,7 @@ namespace Categories.Application.Tags.QueryHandlers
         {
             var langCode = await _languageService.GetCurrentLanguageCode();
 
-            Expression<Func<Tag, bool>> filterCondition = e => e.TypeId == request.TypeId && !request.IsDeletedAvailable && e.IsDeleted;
+            Expression<Func<Tag, bool>> filterCondition = e => e.TypeId == request.TypeId && !(!request.IsDeletedAvailable && e.IsDeleted);
 
             if (request.FilterStr != null && request.FilterStr != "")
             {
@@ -42,7 +42,9 @@ namespace Categories.Application.Tags.QueryHandlers
                                                  .Any(nt => nt.LanguageCode == langCode && nt.Value.Contains(request.FilterStr)));
             }
 
-            var tags = await _dbContext.Tags.Where(filterCondition).ToListAsync(cancellationToken);
+            var tags = await _dbContext.Tags.Where(filterCondition)
+                                            .Include(e=>e.Names)
+                                            .ToListAsync(cancellationToken);
             var mappedTags = _mapper.Map<List<SimpleTagDTO>>(tags);
 
             for (int i = 0; i < tags.Count(); i++)

@@ -39,7 +39,7 @@ namespace Categories.Application.Tags.QueryHandlers
 
             var langCode = await _languageService.GetCurrentLanguageCode();
 
-            var tags = book.Tags.Where(e => e.TypeId == request.TagTypeId && !request.IsDeletedAvailable && e.IsDeleted).ToList();
+            var tags = book.Tags.Where(e => e.TypeId == request.TagTypeId && !(!request.IsDeletedAvailable && e.IsDeleted)).ToList();
             var mappedTags = _mapper.Map<List<SimpleTagDTO>>(tags);
 
             for (int i = 0; i < tags.Count(); i++)

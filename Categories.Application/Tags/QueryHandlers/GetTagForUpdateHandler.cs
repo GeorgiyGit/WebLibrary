@@ -27,7 +27,7 @@ namespace Categories.Application.Tags.QueryHandlers
         }
         public async Task<TagForUpdateDTO> Handle(GetTagForUpdate request, CancellationToken cancellationToken)
         {
-            var tag = await _dbContext.Tags.Where(e => e.Id == request.Id && !request.IsDeletedAvailable && e.IsDeleted).Include(e => e.Names).FirstOrDefaultAsync(cancellationToken);
+            var tag = await _dbContext.Tags.Where(e => e.Id == request.Id && !(!request.IsDeletedAvailable && e.IsDeleted)).Include(e => e.Names).FirstOrDefaultAsync(cancellationToken);
             if (tag == null) throw new HttpException(_localizer[ErrorMessagesPatterns.TagNotFound], HttpStatusCode.NotFound);
 
             return _mapper.Map<TagForUpdateDTO>(tag);

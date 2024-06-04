@@ -36,7 +36,7 @@ namespace Categories.Application.Tags.QueryHandlers
             var tagGroups = new List<TagGroupDTO>(tagTypes.Count);
             foreach (var tagType in tagTypes)
             {
-                var tags = tagType.Tags.Where(e => !request.IsDeletedAvailable && e.IsDeleted).ToList();
+                var tags = tagType.Tags.Where(e => !(!request.IsDeletedAvailable && e.IsDeleted)).ToList();
 
                 var mappedTags = _mapper.Map<List<SimpleTagDTO>>(tags);
                 var mappedTagType = _mapper.Map<TagTypeDTO>(tagType);

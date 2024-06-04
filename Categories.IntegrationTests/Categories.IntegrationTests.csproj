@@ -31,10 +31,4 @@
 	<ProjectReference Include="..\Categories.Infrastructure\Categories.Infrastructure.csproj" />
   </ItemGroup>
 
-
-
-  <ItemGroup>
-    <Folder Include="ControllerTests\Tags\" />
-  </ItemGroup>
-
 </Project>

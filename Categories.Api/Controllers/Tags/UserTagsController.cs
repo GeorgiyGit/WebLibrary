@@ -26,7 +26,7 @@ namespace Categories.Api.Controllers.Tags
         }
 
         [HttpPost]
-        [Route("get-from-book/{bookId}")]
+        [Route("get-from-book")]
         [ProducesResponseType(typeof(ICollection<SimpleTagDTO>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetBookTags([FromBody] GetBookTagsRequest request)
         {
