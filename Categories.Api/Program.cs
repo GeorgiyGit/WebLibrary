@@ -23,13 +23,18 @@ public class Program
 
         var connectionString = builder.Configuration.GetConnectionString("LocalDbContextConnection") ?? throw new InvalidOperationException("Connection string 'LocalDbContextConnection' not found.");
 
-
         ConfigurationManager configuration = builder.Configuration;
 
         builder.Services.AddDbContext<CategoriesDbContext>(x => x.UseSqlServer(connectionString, builder =>
         {
             builder.EnableRetryOnFailure(1, TimeSpan.FromSeconds(5), null);
         }));
+
+        builder.Services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = builder.Configuration.GetConnectionString("Redis");
+            options.InstanceName = "CategoriesApi_";
+        });
 
         builder.Services.AddLocalization();
         builder.Services.AddControllers();
@@ -97,9 +102,9 @@ public class Program
 
         var supportedCultures = new[]
         {
-    new CultureInfo("sk-SK"),
-    new CultureInfo("en-US")
-};
+            new CultureInfo("sk-SK"),
+            new CultureInfo("en-US")
+        };
 
         app.UseRequestLocalization(new RequestLocalizationOptions
         {

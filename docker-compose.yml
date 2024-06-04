@@ -1,6 +1,12 @@
 version: '3.4'
 
 services:
+  redis:
+    image: redis:latest
+
+  redis-test:
+    image: redis:latest
+
   ms-sql-server:
     image: mcr.microsoft.com/mssql/server:2022-latest
 
@@ -24,3 +30,5 @@ services:
 
 volumes:
   sqlsystem:
+  redisdata:
+  redistestdata:

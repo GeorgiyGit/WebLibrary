@@ -7,6 +7,7 @@ using Categories.Domain.Resources.Localization.Errors;
 using Categories.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Localization;
 using System.Net;
 

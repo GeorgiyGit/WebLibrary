@@ -2,10 +2,12 @@
 using Categories.Application.Tags.Queries;
 using Categories.Domain.DTOs.Tags.TagDTOs.Responses;
 using Categories.Domain.DTOs.Tags.TagTypeDTOs.Responses;
+using Categories.Domain.Exceptions;
 using Categories.Domain.Interfaces;
 using Categories.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Categories.Application.Tags.QueryHandlers
 {
@@ -14,24 +16,33 @@ namespace Categories.Application.Tags.QueryHandlers
         private readonly CategoriesDbContext _dbContext;
         private readonly ILanguageService _languageService;
         private readonly IMapper _mapper;
-
+        private readonly IDistributedCache _distributedCache;
         public GetAllCompracedTagsHandler(CategoriesDbContext dbContext,
             ILanguageService languageService,
-            IMapper mapper)
+            IMapper mapper,
+            IDistributedCache distributedCache)
         {
             _dbContext = dbContext;
             _languageService = languageService;
             _mapper = mapper;
+            _distributedCache = distributedCache;
         }
         public async Task<ICollection<TagGroupDTO>> Handle(GetAllCompracedTags request, CancellationToken cancellationToken)
         {
+            var langCode = await _languageService.GetCurrentLanguageCode();
+
+            var recordId = "CompracedTags_" + langCode;
+            if (!request.IsDeletedAvailable)
+            {
+                var cache = await _distributedCache.GetRecordAsync<ICollection<TagGroupDTO>>(recordId,cancellationToken);
+                if (cache != null) return cache;
+            }
+
             var tagTypes = await _dbContext.TagTypes.Where(e => e.IsCompraced)
                                                 .Include(e => e.Names)
                                                 .Include(e => e.Tags)
                                                     .ThenInclude(e => e.Names)
                                                 .ToListAsync(cancellationToken);
-
-            var langCode = await _languageService.GetCurrentLanguageCode();
 
             var tagGroups = new List<TagGroupDTO>(tagTypes.Count);
             foreach (var tagType in tagTypes)
@@ -63,6 +74,10 @@ namespace Categories.Application.Tags.QueryHandlers
                 });
             }
 
+            if (!request.IsDeletedAvailable)
+            {
+                await _distributedCache.SetRecordAsync<ICollection<TagGroupDTO>>(recordId, tagGroups, cancellationToken: cancellationToken);
+            }
             return tagGroups;
         }
     }

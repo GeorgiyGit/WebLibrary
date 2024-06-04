@@ -1,6 +1,20 @@
 version: '3.4'
 
 services:
+  redis-test:
+    container_name: redis-test
+    ports:
+      - "6370:6370"
+    volumes:
+      - redistestdata:/data
+
+  redis:
+    container_name: redis
+    ports:
+      - "6371:6371"
+    volumes:
+      - redisdata:/data
+
   ms-sql-server:
     container_name: sqlserverdb
     environment:
@@ -48,12 +62,14 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - "ConnectionStrings__LocalDbContextConnection=Server=ms-sql-server;Database=CategoriesDb;User Id=SA;Password=12345678Ea#4;TrustServerCertificate=True"
+      - "ConnectionStrings__Redis=redis"
       - "JwtOptions__Issuer=WebLibrary"
       - "JwtOptions__Lifetime=120"
       - "JwtOptions__Audience=WebLibraryAudience"
       - "JwtOptions__Key=yB\bHgL1415r6TH%;jHpWz(Pdrvjy2Aq9xqMeartaer$524fsr_<8awzbsS^!kq':cbF5ygZ*yEE5pys#3z?@L6,zpfuP,?d"
     depends_on:
       - ms-sql-server
+      - redis
     ports:
       - "7002:8080"
       - "7072:8081"

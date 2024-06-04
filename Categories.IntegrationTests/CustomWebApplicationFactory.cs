@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,20 @@ namespace Categories.IntegrationTests
                 services.AddDbContext<CategoriesDbContext>(options =>
                 {
                     options.UseInMemoryDatabase(dbName);
+                });
+
+                services.RemoveAll(typeof(DbContextOptions<CategoriesDbContext>));
+
+                services.AddDbContext<CategoriesDbContext>(options =>
+                {
+                    options.UseInMemoryDatabase(dbName);
+                });
+
+                services.RemoveAll(typeof(IConnectionMultiplexer));
+                services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = "localhost,6370";
+                    options.InstanceName = "TestCategoriesApi_";
                 });
 
                 services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
