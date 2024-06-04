@@ -1,6 +1,12 @@
 version: '3.4'
 
 services:
+  redis:
+    image: redis:latest
+
+  redis-test:
+    image: redis:latest
+
   ms-sql-server:
     image: mcr.microsoft.com/mssql/server:2022-latest
 
@@ -16,5 +22,13 @@ services:
       context: .
       dockerfile: Identity.Api/Dockerfile
 
+  categories.api:
+    image: ${DOCKER_REGISTRY-}categoriesapi
+    build:
+      context: .
+      dockerfile: Categories.Api/Dockerfile
+
 volumes:
   sqlsystem:
+  redisdata:
+  redistestdata:
