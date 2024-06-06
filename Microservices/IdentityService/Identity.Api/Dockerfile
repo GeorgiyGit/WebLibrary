@@ -9,13 +9,13 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Identity.Api/Identity.Api.csproj", "Identity.Api/"]
-COPY ["Identity.Application/Identity.Application.csproj", "Identity.Application/"]
-COPY ["Identity.Domain/Identity.Domain.csproj", "Identity.Domain/"]
-COPY ["Identity.Infrastructure/Identity.Infrastructure.csproj", "Identity.Infrastructure/"]
-RUN dotnet restore "./Identity.Api/Identity.Api.csproj"
+COPY ["Microservices/IdentityService/Identity.Api/Identity.Api.csproj", "Microservices/IdentityService/Identity.Api/"]
+COPY ["Microservices/IdentityService/Identity.Application/Identity.Application.csproj", "Microservices/IdentityService/Identity.Application/"]
+COPY ["Microservices/IdentityService/Identity.Domain/Identity.Domain.csproj", "Microservices/IdentityService/Identity.Domain/"]
+COPY ["Microservices/IdentityService/Identity.Infrastructure/Identity.Infrastructure.csproj", "Microservices/IdentityService/Identity.Infrastructure/"]
+RUN dotnet restore "./Microservices/IdentityService/Identity.Api/Identity.Api.csproj"
 COPY . .
-WORKDIR "/src/Identity.Api"
+WORKDIR "/src/Microservices/IdentityService/Identity.Api"
 RUN dotnet build "./Identity.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
