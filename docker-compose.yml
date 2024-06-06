@@ -14,19 +14,19 @@ services:
     image: ${DOCKER_REGISTRY-}apigateway
     build:
       context: .
-      dockerfile: ApiGateway/Dockerfile
+      dockerfile: ApiGateways/ApiGateway/Dockerfile
 
   identity.api:
     image: ${DOCKER_REGISTRY-}identityapi
     build:
       context: .
-      dockerfile: Identity.Api/Dockerfile
+      dockerfile: Microservices/IdentityService/Identity.Api/Dockerfile
 
   categories.api:
     image: ${DOCKER_REGISTRY-}categoriesapi
     build:
       context: .
-      dockerfile: Categories.Api/Dockerfile
+      dockerfile: Microservices/CategoriesService/Categories.Api/Dockerfile
 
 volumes:
   sqlsystem:

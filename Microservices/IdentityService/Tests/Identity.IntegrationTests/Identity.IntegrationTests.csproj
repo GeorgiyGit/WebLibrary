@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -22,13 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\..\Identity.Api\Identity.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-	<ProjectReference Include="..\Categories.Api\Categories.Api.csproj" />
-	<ProjectReference Include="..\Categories.Domain\Categories.Domain.csproj" />
-	<ProjectReference Include="..\Categories.Infrastructure\Categories.Infrastructure.csproj" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>
