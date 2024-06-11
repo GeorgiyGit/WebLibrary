@@ -28,7 +28,14 @@ services:
       context: .
       dockerfile: Microservices/CategoriesService/Categories.Api/Dockerfile
 
+  virtualpeople.api:
+    image: ${DOCKER_REGISTRY-}virtualpeopleapi
+    build:
+      context: .
+      dockerfile: Microservices/VirtualPeopleService/VirtualPeople.Api/Dockerfile
+
 volumes:
   sqlsystem:
   redisdata:
   redistestdata:
+
